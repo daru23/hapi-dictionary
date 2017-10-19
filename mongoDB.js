@@ -35,7 +35,8 @@ var updateWord = function(db, col, condition, data) {
 
         collection.updateOne(
             condition,
-            { $set: data }, function(err, result) {
+            { $set: data , upsert: true, multi: true},
+            function(err, result) {
 
                 if (err) {
                     console.log(err);
