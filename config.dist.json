@@ -1,0 +1,12 @@
+{
+  "server" : {
+
+  },
+  "db" : {
+    "host" : "HOST",
+    "user" : "USER",
+    "password" : "PASSW",
+    "database" : "DATABASE"
+  }
+
+}
