@@ -1,7 +1,3 @@
-const Promise = require('promise');
-
-// Connection URL
-
 var insertWords = function(db, col, data) {
 
     return new Promise(function (resolve, reject) {

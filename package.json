@@ -6,8 +6,7 @@
   "dependencies": {
     "hapi": "^16.1.0",
     "joi": "^10.2.2",
-    "mongodb": "^2.2.33",
-    "promise": "^8.0.1"
+    "mongodb": "^2.2.33"
   },
   "devDependencies": {
     "node-sass": "^4.5.0",
