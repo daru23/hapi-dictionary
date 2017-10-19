@@ -2,7 +2,7 @@
 config.json
 
 #node-modules
-node-modules/
+node_modules
 
 #IDE style
 .idea/
