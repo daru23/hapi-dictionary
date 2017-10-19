@@ -26,25 +26,35 @@ var insertWords = function(db, col, data) {
 
 };
 
-var updateWord = function(db, col, condition, data, callback) {
-    // Get the documents collection
-    var collection = db.collection(col);
-    // Update document where a is 2, set b equal to 1
-    collection.updateOne(
-        condition,
-        { $set: data }, function(err, result) {
-            assert.equal(err, null);
-            assert.equal(1, result.result.n);
-            console.log("Updated the document with the field a equal to 2");
-            callback(result);
-        });
+var updateWord = function(db, col, condition, data) {
+
+    return new Promise(function (resolve, reject) {
+
+        // Get the documents collection
+        var collection = db.collection(col);
+
+        collection.updateOne(
+            condition,
+            { $set: data }, function(err, result) {
+
+                if (err) {
+                    console.log(err);
+                    reject(err);
+                }
+
+                console.log("Updated the document.");
+                resolve(result);
+            });
+    })
 };
 
 var findWords = function(db, col) {
 
     return new Promise(function (resolve, reject) {
+
         // Get the documents collection
         var collection = db.collection(col);
+
         // Find some documents
         collection.find({}).toArray(function(err, docs) {
 
