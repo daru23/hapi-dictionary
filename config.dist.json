@@ -1,11 +1,11 @@
 {
   "server" : {
-
+    "host" : "HOST-NAME"
   },
   "db" : {
     "host" : "HOST",
     "user" : "USER",
-    "password" : "PASSW",
+    "password" : "PASSWORD",
     "database" : "DATABASE"
   }
 
