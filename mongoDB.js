@@ -1,21 +1,27 @@
-var MongoClient = require('mongodb').MongoClient;
+const Promise = require('promise');
+
 // Connection URL
 
-var insertWords = function(db, col, data, callback) {
-    // Get the documents collection
-    var collection = db.collection(col);
+var insertWords = function(db, col, data) {
 
-    collection.insertMany(
-        data,
-        function(err, result) {
+    return new Promise(function (resolve, reject) {
 
-            if (err) {
-                console.log(err);
-                callback(err);
-            }
+        // Get the documents collection
+        var collection = db.collection(col);
 
-            console.log("Inserted documents into the document collection");
-            callback(result);
+        collection.insertMany(
+            data,
+            function(err, result) {
+
+                if (err) {
+                    console.log(err);
+                    reject(err, null);
+                }
+
+                console.log("Inserted documents into the document collection");
+                resolve(null, result);
+            });
+
     });
 
 };
@@ -34,22 +40,26 @@ var updateWord = function(db, col, condition, data, callback) {
         });
 };
 
-var findWords = function(db, col, callback) {
-    // Get the documents collection
-    var collection = db.collection(col);
-    // Find some documents
-    collection.find({}).toArray(function(err, docs) {
+var findWords = function(db, col) {
 
-        if (err) {
-            console.log(err);
-            callback(err);
-        }
+    return new Promise(function (resolve, reject) {
+        // Get the documents collection
+        var collection = db.collection(col);
+        // Find some documents
+        collection.find({}).toArray(function(err, docs) {
 
-        console.log("Found the following records");
-        console.dir(docs);
+            if (err) {
+                console.log(err);
+                reject(err);
+            }
 
-        callback(docs);
+            console.log("Found the following records");
+
+            resolve(docs);
+        });
+
     });
+
 };
 
 module.exports.insertWords = insertWords;

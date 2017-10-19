@@ -7,7 +7,10 @@
  * Functions handlers for Hapi requests
  */
 
-const db = require('./db.js');
+const mongo = require('./mongoDB.js'),
+      url = "mongodb://localhost:27017/dictionary",
+      MongoClient = require('mongodb').MongoClient;
+
 
 /**
  * word
@@ -26,11 +29,30 @@ exports.word = function (req, res){
 
 exports.getAllWords = function (req, res){
 
-    db.getAllWords().then(function (words) {
-        console.log(words);
-        //SQL close connection
-        res ({mes : words});
+    MongoClient.connect(url, function(err, db) {
+
+        console.log("Connected correctly to server");
+
+        mongo.findWords(db, 'words').then(function (result, err) {
+
+            if (err) {
+                console.log(err);
+                db.close();
+            }
+
+            res ({mes : result});
+            db.close();
+
+        } );
+
     });
+
+
+    // db.getAllWords().then(function (words) {
+    //     console.log(words);
+    //     //SQL close connection
+    //     res ({mes : words});
+    // });
 
 };
 
