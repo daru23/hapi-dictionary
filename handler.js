@@ -97,6 +97,12 @@ exports.getAllLabels = function (req, res) {
 
 };
 
+/**
+ * addWords
+ * POST
+ * @param req
+ * @param res
+ */
 exports.addWords = function (req, res) {
 
     let words = req.payload.data;
@@ -123,7 +129,13 @@ exports.addWords = function (req, res) {
 
 };
 
-exports.deleteWords = function (req, res) {
+/**
+ * deleteWord
+ * POST
+ * @param req
+ * @param res
+ */
+exports.deleteWord = function (req, res) {
 
     let word =  req.params.word ? {word: encodeURIComponent(req.params.word)} : res({error: "No word provided."});
 
@@ -149,7 +161,13 @@ exports.deleteWords = function (req, res) {
 
 };
 
-exports.addLabels = function (req, res) {
+/**
+ * addLabels
+ * POST
+ * @param req
+ * @param res
+ */
+exports.addLabel = function (req, res) {
 
     let labels = req.payload.data;
 

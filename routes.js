@@ -56,7 +56,7 @@ var routes = [
     {   method   : 'POST',
         path     : '/labels',
         config   : {
-            handler  : handler.addLabels,
+            handler  : handler.addLabel,
             validate: {
                 payload: {
                     data : Joi.object({
@@ -74,7 +74,7 @@ var routes = [
     {   method   : 'POST',
         path     : '/word/{word}',
         config   : {
-            handler  : handler.deleteWords,
+            handler  : handler.deleteWord,
             validate: {
                 params: {word: Joi.string()}
             }
