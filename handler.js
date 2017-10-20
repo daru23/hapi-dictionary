@@ -14,7 +14,7 @@ const mongo = require('./mongoDB.js'),
 
 /**
  * word
- * GET word
+ * GET
  * @param req
  * @param res
  */
@@ -41,6 +41,12 @@ exports.word = function (req, res){
     });
 };
 
+/**
+ * getAllWords
+ * GET
+ * @param req
+ * @param res
+ */
 exports.getAllWords = function (req, res){
 
     MongoClient.connect(url, function(err, db) {
@@ -63,6 +69,12 @@ exports.getAllWords = function (req, res){
 
 };
 
+/**
+ * getAllLabels
+ * GET
+ * @param req
+ * @param res
+ */
 exports.getAllLabels = function (req, res){
 
     MongoClient.connect(url, function(err, db) {
