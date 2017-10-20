@@ -47,21 +47,26 @@ exports.getAllWords = function (req, res){
 
     });
 
-
-    // db.getAllWords().then(function (words) {
-    //     console.log(words);
-    //     //SQL close connection
-    //     res ({mes : words});
-    // });
-
 };
 
 exports.getAllLabels = function (req, res){
 
-    db.getAllLabels().then(function (labels) {
-        console.log(labels);
-        //SQL close connection
-        res ({mes : labels});
+    MongoClient.connect(url, function(err, db) {
+
+        console.log("Connected correctly to server");
+
+        mongo.findWords(db, 'labels').then(function (result, err) {
+
+            if (err) {
+                console.log(err);
+                db.close();
+            }
+
+            res ({mes : result});
+            db.close();
+
+        } );
+
     });
 
 };
