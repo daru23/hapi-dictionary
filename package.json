@@ -9,7 +9,6 @@
     "mongodb": "^2.2.33"
   },
   "devDependencies": {
-    "node-sass": "^4.5.0",
     "nodemon": "^1.12.1"
   },
   "scripts": {
