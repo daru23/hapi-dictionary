@@ -39,7 +39,7 @@ var routes = [
     {   method   : 'POST',
         path     : '/word',
         config   : {
-            handler  : handler.addWord,
+            handler  : handler.addWords,
             validate: {
                 payload: {
                     data: Joi.array().items(
@@ -53,12 +53,24 @@ var routes = [
             }
         }
     },
-    // {   method   : 'POST',
-    //     path     : '/label',
-    //     config   : {
-    //         handler  : handler.addLabel
-    //     }
-    // }
+    {   method   : 'POST',
+        path     : '/labels',
+        config   : {
+            handler  : handler.addLabels,
+            validate: {
+                payload: {
+                    data : Joi.object({
+                        filter: Joi.object({
+                            word: Joi.string().required()
+                        }),
+                        update: Joi.object({
+                            label: Joi.boolean().required()
+                        })
+                    })
+                }
+            }
+        }
+    }
 ];
 
 /**

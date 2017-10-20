@@ -22,7 +22,7 @@ let insertDocuments = function(db, col, data) {
 
 };
 
-let updateDocument = function(db, col, filter, data) {
+let updateDocuments = function(db, col, filter, update) {
 
     return new Promise(function (resolve, reject) {
 
@@ -31,7 +31,8 @@ let updateDocument = function(db, col, filter, data) {
 
         collection.updateOne(
             filter,
-            { $set: data , upsert: true, multi: true},
+            { $set : update},
+            { multi: true },
             function(err, result) {
 
                 if (err) {
@@ -39,7 +40,7 @@ let updateDocument = function(db, col, filter, data) {
                     reject(err);
                 }
 
-                console.log("Updated the document.");
+                console.log("Updated documents");
                 resolve(result);
             });
     })
@@ -121,7 +122,7 @@ let deleteDocuments = function (db, col, filter) {
 
 // Exporting modules
 module.exports.insertDocuments = insertDocuments;
-module.exports.updateDocument = updateDocument;
+module.exports.updateDocuments = updateDocuments;
 module.exports.findDocuments = findDocuments;
 module.exports.deleteDocument = deleteDocument;
 module.exports.deleteDocuments = deleteDocuments;

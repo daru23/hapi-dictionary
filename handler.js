@@ -97,7 +97,7 @@ exports.getAllLabels = function (req, res) {
 
 };
 
-exports.addWord = function (req, res) {
+exports.addWords = function (req, res) {
 
     let words = req.payload.data;
 
@@ -108,6 +108,32 @@ exports.addWord = function (req, res) {
         console.log("Connected correctly to server");
 
         mongo.insertDocuments(db, 'words', words).then(function (result, err) {
+
+            if (err) {
+                console.log(err);
+                db.close();
+            }
+
+            res ({mes : result});
+            db.close();
+
+        } );
+
+    });
+
+};
+
+exports.addLabels = function (req, res) {
+
+    let labels = req.payload.data;
+
+    console.log(labels);
+
+    MongoClient.connect(url, function(err, db) {
+
+        console.log("Connected correctly to server");
+
+        mongo.updateDocuments(db, 'words', labels.filter, labels.update).then(function (result, err) {
 
             if (err) {
                 console.log(err);
