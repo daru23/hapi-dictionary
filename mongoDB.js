@@ -22,7 +22,7 @@ let insertDocuments = function(db, col, data) {
 
 };
 
-let updateDocument = function(db, col, condition, data) {
+let updateDocument = function(db, col, filter, data) {
 
     return new Promise(function (resolve, reject) {
 
@@ -30,7 +30,7 @@ let updateDocument = function(db, col, condition, data) {
         let collection = db.collection(col);
 
         collection.updateOne(
-            condition,
+            filter,
             { $set: data , upsert: true, multi: true},
             function(err, result) {
 
@@ -45,7 +45,7 @@ let updateDocument = function(db, col, condition, data) {
     })
 };
 
-let findDocuments = function(db, col) {
+let findDocuments = function(db, col, filter) {
 
     return new Promise(function (resolve, reject) {
 
@@ -53,7 +53,7 @@ let findDocuments = function(db, col) {
         let collection = db.collection(col);
 
         // Find some documents
-        collection.find({}).toArray(function(err, docs) {
+        collection.find(filter).toArray(function(err, docs) {
 
             if (err) {
                 console.log(err);
@@ -69,7 +69,7 @@ let findDocuments = function(db, col) {
 
 };
 
-let deleteDocument = function (db, col, condition) {
+let deleteDocument = function (db, col, fikter) {
 
     return new Promise(function (resolve, reject) {
 
@@ -77,7 +77,7 @@ let deleteDocument = function (db, col, condition) {
         let collection = db.collection(col);
 
         //Delete document
-        collection.deleteOne(condition, function(err, result) {
+        collection.deleteOne(filter, function(err, result) {
 
             if (err) {
                 console.log(err);
@@ -94,7 +94,7 @@ let deleteDocument = function (db, col, condition) {
 
 };
 
-let deleteDocuments = function (db, col, condition) {
+let deleteDocuments = function (db, col, filter) {
 
     return new Promise(function (resolve, reject) {
 
@@ -102,7 +102,7 @@ let deleteDocuments = function (db, col, condition) {
         let collection = db.collection(col);
 
         //Delete document
-        collection.deleteMany(condition, {}, function(err, result) {
+        collection.deleteMany(filter, {}, function(err, result) {
 
             if (err) {
                 console.log(err);
@@ -121,7 +121,7 @@ let deleteDocuments = function (db, col, condition) {
 
 // Exporting modules
 module.exports.insertDocument = insertDocuments;
-module.exports.updateWord = updateWord;
-module.exports.findWords = findWords;
-module.exports.deleteWord = deleteWord;
-module.exports.deleteWords = deleteWords;
+module.exports.updateDocument = updateDocument;
+module.exports.findDocumens = findDocuments;
+module.exports.deleteDocument = deleteDocument;
+module.exports.deleteDocuments = deleteDocuments;

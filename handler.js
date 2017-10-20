@@ -33,7 +33,7 @@ exports.getAllWords = function (req, res){
 
         console.log("Connected correctly to server");
 
-        mongo.findWords(db, 'words').then(function (result, err) {
+        mongo.findDocumens(db, 'words', {}).then(function (result, err) {
 
             if (err) {
                 console.log(err);
@@ -55,7 +55,7 @@ exports.getAllLabels = function (req, res){
 
         console.log("Connected correctly to server");
 
-        mongo.findWords(db, 'labels').then(function (result, err) {
+        mongo.findDocumens(db, 'words', {label : {'$exists' : true}}).then(function (result, err) {
 
             if (err) {
                 console.log(err);
