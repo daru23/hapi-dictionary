@@ -35,6 +35,18 @@ var routes = [
         config   : {
             handler  : handler.getAllLabels
         }
+    },
+    {   method   : 'POST',
+        path     : '/word',
+        config   : {
+            handler  : handler.addWord
+        }
+    },
+    {   method   : 'POST',
+        path     : '/label',
+        config   : {
+            handler  : handler.addLabel
+        }
     }
 ];
 

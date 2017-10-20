@@ -1,7 +1,7 @@
 {
   "name": "hapi-dictionary",
   "version": "1.0.0",
-  "description": "Application to translate words for learning proposes",
+  "description": "API that retreive endpoints to handle dictionary data",
   "main": "index.js",
   "dependencies": {
     "hapi": "^16.1.0",
@@ -9,21 +9,21 @@
     "mongodb": "^2.2.33"
   },
   "devDependencies": {
+    "mocha": "^4.0.1",
     "nodemon": "^1.12.1"
   },
   "scripts": {
-    "server-up": "node api/server.js",
-    "build-css": "node-sass --include-path scclearss scss/main.scss    public/css/main.css",
-    "watch-css": "nodemon -e scss -x \"npm run build-css\""
+    "start": "node server.js",
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/daru23/dutch-dictionary.git"
+    "url": "git+https://github.com/daru23/hapi-dictionary.git"
   },
   "author": "Daniela Ruiz",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/daru23/dutch-dictionary/issues"
+    "url": "https://github.com/daru23/hapi-dictionary/issues"
   },
-  "homepage": "https://github.com/daru23/dutch-dictionary#readme"
+  "homepage": "https://github.com/daru23/hapi-dictionary#readme"
 }
