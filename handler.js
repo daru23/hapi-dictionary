@@ -20,11 +20,25 @@ const mongo = require('./mongoDB.js'),
  */
 exports.word = function (req, res){
 
-    var word = req.params.word ? encodeURIComponent(req.params.word) : 'stranger';
+    let word = req.params.word ? encodeURIComponent(req.params.word) : 'stranger';
 
-    //SQL connection to get the word
-    res({msg : 'Hello ' + word + '!'});
+    MongoClient.connect(url, function(err, db) {
 
+        console.log("Connected correctly to server");
+
+        mongo.findDocuments(db, 'words', {'word': word}).then(function (result, err) {
+
+            if (err) {
+                console.log(err);
+                db.close();
+            }
+
+            res({mes: result});
+            db.close();
+
+        });
+
+    });
 };
 
 exports.getAllWords = function (req, res){
@@ -33,7 +47,7 @@ exports.getAllWords = function (req, res){
 
         console.log("Connected correctly to server");
 
-        mongo.findDocumens(db, 'words', {}).then(function (result, err) {
+        mongo.findDocuments(db, 'words', {}).then(function (result, err) {
 
             if (err) {
                 console.log(err);
@@ -55,7 +69,7 @@ exports.getAllLabels = function (req, res){
 
         console.log("Connected correctly to server");
 
-        mongo.findDocumens(db, 'words', {label : {'$exists' : true}}).then(function (result, err) {
+        mongo.findDocuments(db, 'words', {label : {'$exists' : true}}).then(function (result, err) {
 
             if (err) {
                 console.log(err);
