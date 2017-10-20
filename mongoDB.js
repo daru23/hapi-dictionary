@@ -11,11 +11,11 @@ let insertDocuments = function(db, col, data) {
 
                 if (err) {
                     console.log(err);
-                    reject(err, null);
+                    reject(err);
                 }
 
                 console.log("Inserted documents into the document collection");
-                resolve(null, result);
+                resolve(result);
             });
 
     });
