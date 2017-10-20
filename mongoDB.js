@@ -70,7 +70,7 @@ let findDocuments = function(db, col, filter) {
 
 };
 
-let deleteDocument = function (db, col, fikter) {
+let deleteDocument = function (db, col, filter) {
 
     return new Promise(function (resolve, reject) {
 

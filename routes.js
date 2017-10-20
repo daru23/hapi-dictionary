@@ -37,7 +37,7 @@ var routes = [
         }
     },
     {   method   : 'POST',
-        path     : '/word',
+        path     : '/words',
         config   : {
             handler  : handler.addWords,
             validate: {
@@ -70,7 +70,16 @@ var routes = [
                 }
             }
         }
-    }
+    },
+    {   method   : 'POST',
+        path     : '/word/{word}',
+        config   : {
+            handler  : handler.deleteWords,
+            validate: {
+                params: {word: Joi.string()}
+            }
+        }
+    },
 ];
 
 /**

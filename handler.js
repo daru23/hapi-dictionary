@@ -123,6 +123,32 @@ exports.addWords = function (req, res) {
 
 };
 
+exports.deleteWords = function (req, res) {
+
+    let word =  req.params.word ? {word: encodeURIComponent(req.params.word)} : res({error: "No word provided."});
+
+    console.log(word);
+
+    MongoClient.connect(url, function(err, db) {
+
+        console.log("Connected correctly to server");
+
+        mongo.deleteDocument(db, 'words', word).then(function (result, err) {
+
+            if (err) {
+                console.log(err);
+                db.close();
+            }
+
+            res ({mes : result});
+            db.close();
+
+        } );
+
+    });
+
+};
+
 exports.addLabels = function (req, res) {
 
     let labels = req.payload.data;
