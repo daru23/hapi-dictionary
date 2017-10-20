@@ -18,9 +18,9 @@ const mongo = require('./mongoDB.js'),
  * @param req
  * @param res
  */
-exports.word = function (req, res){
+exports.word = function (req, res) {
 
-    let word = req.params.word ? encodeURIComponent(req.params.word) : 'stranger';
+    let word = req.params.word ? encodeURIComponent(req.params.word) : res({error: "No word provided."});
 
     MongoClient.connect(url, function(err, db) {
 
@@ -47,7 +47,7 @@ exports.word = function (req, res){
  * @param req
  * @param res
  */
-exports.getAllWords = function (req, res){
+exports.getAllWords = function (req, res) {
 
     MongoClient.connect(url, function(err, db) {
 
@@ -75,13 +75,39 @@ exports.getAllWords = function (req, res){
  * @param req
  * @param res
  */
-exports.getAllLabels = function (req, res){
+exports.getAllLabels = function (req, res) {
 
     MongoClient.connect(url, function(err, db) {
 
         console.log("Connected correctly to server");
 
         mongo.findDocuments(db, 'words', {label : {'$exists' : true}}).then(function (result, err) {
+
+            if (err) {
+                console.log(err);
+                db.close();
+            }
+
+            res ({mes : result});
+            db.close();
+
+        } );
+
+    });
+
+};
+
+exports.addWord = function (req, res) {
+
+    let words = req.payload.data;
+
+    console.log(words);
+
+    MongoClient.connect(url, function(err, db) {
+
+        console.log("Connected correctly to server");
+
+        mongo.insertDocuments(db, 'words', words).then(function (result, err) {
 
             if (err) {
                 console.log(err);

@@ -120,7 +120,7 @@ let deleteDocuments = function (db, col, filter) {
 };
 
 // Exporting modules
-module.exports.insertDocument = insertDocuments;
+module.exports.insertDocuments = insertDocuments;
 module.exports.updateDocument = updateDocument;
 module.exports.findDocuments = findDocuments;
 module.exports.deleteDocument = deleteDocument;

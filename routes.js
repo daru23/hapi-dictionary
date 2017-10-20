@@ -35,13 +35,24 @@ var routes = [
         config   : {
             handler  : handler.getAllLabels
         }
-    }
-    // {   method   : 'POST',
-    //     path     : '/word',
-    //     config   : {
-    //         handler  : handler.addWord
-    //     }
-    // },
+    },
+    {   method   : 'POST',
+        path     : '/word',
+        config   : {
+            handler  : handler.addWord,
+            validate: {
+                payload: {
+                    data: Joi.array().items(
+                        Joi.object({
+                            word: Joi.string().required(),
+                            translation: Joi.string().required(),
+                            label: Joi.boolean()
+                        })
+                    )
+                }
+            }
+        }
+    },
     // {   method   : 'POST',
     //     path     : '/label',
     //     config   : {
